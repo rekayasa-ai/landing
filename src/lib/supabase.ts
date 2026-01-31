@@ -25,14 +25,104 @@ export interface NewsArticle {
   id: string;
   title: string;
   excerpt: string;
-  image_url: string;
+  content?: string;
+  image_url?: string;
   source_url: string;
+  source_name?: string;
   published_at: string;
+  is_featured?: boolean;
+  ai_generated?: boolean;
+  created_at?: string;
 }
 
 export interface SiteConfig {
   key: string;
   value: string;
+}
+
+// ============================================
+// NEWS ARTICLES - Supabase Functions
+// ============================================
+
+/**
+ * Fetch all news articles from Supabase, ordered by published_at desc
+ * Returns empty array if no articles or Supabase not connected
+ */
+export async function getNewsArticles(): Promise<NewsArticle[]> {
+  if (!supabase) {
+    console.log('Supabase not connected');
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from('news_articles')
+    .select('*')
+    .order('published_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching news:', error);
+    return [];
+  }
+
+  return data || [];
+}
+
+/**
+ * Fetch the featured news article
+ * Returns the first article with is_featured = true, or the most recent article
+ */
+export async function getFeaturedNews(): Promise<NewsArticle | null> {
+  if (!supabase) {
+    return null;
+  }
+
+  // Try to get featured article first
+  const { data: featured, error: featuredError } = await supabase
+    .from('news_articles')
+    .select('*')
+    .eq('is_featured', true)
+    .limit(1)
+    .single();
+
+  if (!featuredError && featured) {
+    return featured;
+  }
+
+  // Fall back to most recent article
+  const { data: recent, error: recentError } = await supabase
+    .from('news_articles')
+    .select('*')
+    .order('published_at', { ascending: false })
+    .limit(1)
+    .single();
+
+  if (recentError) {
+    return null;
+  }
+
+  return recent;
+}
+
+/**
+ * Fetch a single news article by ID
+ */
+export async function getNewsArticleById(id: string): Promise<NewsArticle | null> {
+  if (!supabase) {
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from('news_articles')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching article:', error);
+    return null;
+  }
+
+  return data;
 }
 
 // Helper to get site config

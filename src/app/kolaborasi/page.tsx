@@ -59,16 +59,6 @@ export default function KolaborasiPage() {
 
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-16">
-                        {/* Badge */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-medium mb-6"
-                        >
-                            <PenTool className="w-4 h-4" />
-                            Open Contribution
-                        </motion.div>
-
                         {/* Heading */}
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
