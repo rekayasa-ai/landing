@@ -141,7 +141,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl sm:text-6xl md:text-7xl font-bold text-navy leading-tight mb-6"
+              className="text-3xl sm:text-5xl md:text-7xl font-bold text-navy leading-tight mb-6"
             >
               Bangun Karir di
               <br />
@@ -155,7 +155,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed"
+              className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
             >
               <span className="font-semibold text-navy">rekayasa.ai</span> adalah platform edukasi AI
               berbahasa Indonesia. Kami membantu Anda menguasai AI Engineering dari fundamental
@@ -190,7 +190,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="grid grid-cols-3 gap-8 max-w-lg mx-auto"
+              className="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto"
             >
               {[
                 { value: '10+', label: 'Learning Paths' },

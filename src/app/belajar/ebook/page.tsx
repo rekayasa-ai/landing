@@ -11,10 +11,10 @@ export default function EbookPage() {
             {/* Library Header */}
             <section className="bg-white border-b border-gray-100">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <h1 className="text-4xl font-bold text-navy mb-3">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-navy mb-3">
                         Koleksi E-book
                     </h1>
-                    <p className="text-gray-500 text-lg max-w-lg">
+                    <p className="text-gray-500 text-base sm:text-lg max-w-lg">
                         Panduan AI Engineering dalam Bahasa Indonesia. Ditulis praktisi, untuk praktisi.
                     </p>
                 </div>

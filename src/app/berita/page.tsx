@@ -64,7 +64,7 @@ export default function BeritaPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl sm:text-5xl font-bold text-navy mb-4"
+                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-4"
                         >
                             Berita{' '}
                             <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
@@ -76,7 +76,7 @@ export default function BeritaPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-gray-600 max-w-xl mx-auto text-lg"
+                            className="text-gray-600 max-w-xl mx-auto text-base sm:text-lg"
                         >
                             Update terbaru dari dunia AI, khususnya yang relevan untuk Indonesia.
                         </motion.p>
@@ -107,7 +107,7 @@ export default function BeritaPage() {
                         >
                             <div className="grid lg:grid-cols-2 gap-0">
                                 {/* Image */}
-                                <div className="aspect-video lg:aspect-auto bg-gradient-to-br from-blue-100 to-indigo-100 relative min-h-[300px]">
+                                <div className="aspect-video lg:aspect-auto bg-gradient-to-br from-blue-100 to-indigo-100 relative min-h-[200px] sm:min-h-[300px]">
                                     {featured.image_url ? (
                                         <img
                                             src={featured.image_url}
@@ -127,7 +127,7 @@ export default function BeritaPage() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                                <div className="p-5 sm:p-8 lg:p-12 flex flex-col justify-center">
                                     <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
                                         <Calendar className="w-4 h-4" />
                                         <span>
