@@ -1,26 +1,268 @@
 @import "tailwindcss";
 
+/* Custom Hero Font */
+@font-face {
+  font-family: 'Hero';
+  src: url('/fonts/HeroLight-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Brand Colors - Minimal Elegant with Strategic Accent */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #1E293B;
+  --navy-dark: #0F172A;
+  --electric: #38BFF0;
+  --background: #FFFFFF;
+  --background-alt: #F8FAFC;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border: #E2E8F0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: #1E293B;
+  --color-navy-dark: #0F172A;
+  --color-navy-light: #334155;
+  --color-electric: #38BFF0;
+  --color-background: #FFFFFF;
+  --color-background-alt: #F8FAFC;
+  --color-foreground: #1E293B;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base Styles */
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Primary Button - Electric Blue (for CTAs) */
+.btn-primary {
+  background: var(--electric);
+  color: white;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #0EA5E9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 191, 240, 0.3);
+}
+
+/* Secondary Button - Outline Navy */
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--navy);
+  background: var(--background-alt);
+}
+
+/* Navy Button - For less prominent actions */
+.btn-navy {
+  background: var(--navy);
+  color: white;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-navy:hover {
+  background: var(--navy-dark);
+}
+
+/* Card Hover Effect */
+.card-hover {
+  transition: all 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Accent Text - Electric Blue */
+.text-accent {
+  color: var(--electric);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Selection */
+::selection {
+  background: rgba(56, 191, 240, 0.15);
+  color: #1E293B;
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--electric);
+  box-shadow: 0 8px 32px rgba(56, 191, 240, 0.15);
+}
+
+/* Card Scale Animation */
+.card-scale {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-scale:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* E-book Cover Scale */
+.cover-scale {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(120px, auto);
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-item-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento-item-wide {
+  grid-column: span 2;
+}
+
+.bento-item-tall {
+  grid-row: span 2;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+}
+
+.dropdown-trigger:hover .dropdown-menu,
+.dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Mobile Dropdown */
+.mobile-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobile-dropdown.open {
+  max-height: 500px;
+}
+
+/* Cyber Loading Effect */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(56, 191, 240, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(56, 191, 240, 0.6);
+  }
+}
+
+.loading-glow {
+  animation: pulse-glow 1.5s infinite;
+}
+
+/* Price Badge */
+.price-badge {
+  background: linear-gradient(135deg, var(--electric), #0EA5E9);
+  color: white;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(56, 191, 240, 0.4);
+}
+
+/* Featured Card Gradient Border */
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 1rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.1rem;
+  background: linear-gradient(135deg, var(--electric), #8B5CF6);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
 }
