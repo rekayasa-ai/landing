@@ -3,72 +3,37 @@
 import { useEffect, useRef } from 'react';
 
 interface AdUnitProps {
-    /** Adsterra ad key - get this from your Adsterra dashboard */
-    adKey?: string;
-    /** Ad format: 'iframe' for banner, 'js' for native */
-    format?: 'iframe' | 'js';
-    /** Ad width in pixels */
-    width?: number;
-    /** Ad height in pixels */
-    height?: number;
     /** Additional CSS classes */
     className?: string;
 }
 
 /**
- * Adsterra Native Banner Ad Component
- * 
- * Usage:
- * 1. Get your ad key from Adsterra Publishers dashboard
- * 2. Add your key to environment variable: NEXT_PUBLIC_ADSTERRA_KEY
- * 3. Use: <AdUnit />
- * 
- * Or pass the key directly:
- * <AdUnit adKey="your-key-here" width={300} height={250} />
+ * Adsterra Ad Component
+ * Uses the invoke.js format from Adsterra dashboard
  */
-export default function AdUnit({
-    adKey = process.env.NEXT_PUBLIC_ADSTERRA_KEY,
-    format = 'iframe',
-    width = 300,
-    height = 250,
-    className = ''
-}: AdUnitProps) {
+export default function AdUnit({ className = '' }: AdUnitProps) {
     const adContainerRef = useRef<HTMLDivElement>(null);
+    const adId = 'ee1ef9b1241ee2b165e761007de780a5';
 
     useEffect(() => {
-        // Don't load ads if no key is provided
-        if (!adKey) {
-            console.log('AdUnit: No Adsterra key provided');
-            return;
-        }
-
-        // Create and inject the ad script
         const container = adContainerRef.current;
         if (!container) return;
 
-        // Clear any existing content
-        container.innerHTML = '';
+        // Check if script already loaded
+        const existingScript = document.querySelector(`script[src*="${adId}"]`);
+        if (existingScript) return;
 
-        // Create options script
-        const optionsScript = document.createElement('script');
-        optionsScript.type = 'text/javascript';
-        optionsScript.text = `
-            atOptions = {
-                'key' : '${adKey}',
-                'format' : '${format}',
-                'height' : ${height},
-                'width' : ${width},
-                'params' : {}
-            };
-        `;
-        container.appendChild(optionsScript);
+        // Create the ad container div
+        const adDiv = document.createElement('div');
+        adDiv.id = `container-${adId}`;
+        container.appendChild(adDiv);
 
-        // Create invoke script
-        const invokeScript = document.createElement('script');
-        invokeScript.type = 'text/javascript';
-        invokeScript.src = `//www.highperformanceformat.com/${adKey}/invoke.js`;
-        invokeScript.async = true;
-        container.appendChild(invokeScript);
+        // Create and inject the script
+        const script = document.createElement('script');
+        script.async = true;
+        script.setAttribute('data-cfasync', 'false');
+        script.src = `https://pl28615948.effectivegatecpm.com/${adId}/invoke.js`;
+        container.appendChild(script);
 
         // Cleanup on unmount
         return () => {
@@ -76,18 +41,12 @@ export default function AdUnit({
                 container.innerHTML = '';
             }
         };
-    }, [adKey, format, width, height]);
-
-    // Don't render anything if no ad key
-    if (!adKey) {
-        return null;
-    }
+    }, []);
 
     return (
         <div
             ref={adContainerRef}
             className={`flex items-center justify-center my-8 ${className}`}
-            style={{ minHeight: height, minWidth: width }}
             aria-label="Advertisement"
         />
     );

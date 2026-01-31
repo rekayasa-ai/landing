@@ -53,12 +53,12 @@ export default function Footer() {
                 </div>
 
                 {/* Navigation Links */}
-                <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-8">
+                <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-x-8 mb-8">
                     {footerLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-lg font-medium text-electric hover:text-white transition-colors"
+                            className="text-base sm:text-lg font-medium text-electric hover:text-white transition-colors"
                         >
                             {link.label}
                         </Link>

@@ -61,7 +61,7 @@ export default function KomunitasPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl sm:text-5xl font-bold text-navy mb-4"
+                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-4"
                         >
                             Gabung{' '}
                             <span className="bg-gradient-to-r from-[#5865F2] to-purple-500 bg-clip-text text-transparent">
@@ -73,7 +73,7 @@ export default function KomunitasPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-gray-600 max-w-xl mx-auto text-lg"
+                            className="text-gray-600 max-w-xl mx-auto text-base sm:text-lg"
                         >
                             Bergabung dengan ribuan AI Engineer Indonesia. Belajar, diskusi, dan tumbuh bersama.
                         </motion.p>

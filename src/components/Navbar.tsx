@@ -123,26 +123,29 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Navigation */}
+            {/* Mobile Navigation - Full Page */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white border-t border-gray-100"
+                        initial={{ opacity: 0, x: '100%' }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: '100%' }}
+                        transition={{ type: 'tween', duration: 0.3 }}
+                        className="md:hidden fixed left-0 right-0 bg-white z-50 flex flex-col"
+                        style={{ top: '64px', height: 'calc(100vh - 64px)' }}
                     >
-                        <div className="px-4 py-3 space-y-1">
-                            {/* Belajar Accordion */}
-                            <div>
+                        {/* Scrollable nav content */}
+                        <div className="flex-1 overflow-y-auto px-6 py-6">
+                            {/* Belajar Section */}
+                            <div className="mb-1">
                                 <button
                                     onClick={() => setIsBelajarOpen(!isBelajarOpen)}
-                                    className={`w-full px-3 py-2.5 rounded-lg text-sm font-medium flex items-center justify-between transition-colors ${isActiveBelajar
-                                        ? 'text-electric'
-                                        : 'text-gray-600 hover:text-electric'
-                                        }`}
+                                    className="w-full px-3 py-3 rounded-lg text-base font-medium flex items-center justify-between text-navy"
                                 >
-                                    <span>Belajar</span>
+                                    <div className="flex items-center gap-3">
+                                        <BookOpen className="w-5 h-5" />
+                                        <span>Belajar</span>
+                                    </div>
                                     <ChevronDown className={`w-4 h-4 transition-transform ${isBelajarOpen ? 'rotate-180' : ''}`} />
                                 </button>
 
@@ -152,17 +155,14 @@ export default function Navbar() {
                                             initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto' }}
                                             exit={{ opacity: 0, height: 0 }}
-                                            className="mt-1 ml-4 space-y-1"
+                                            className="ml-8 mt-1 space-y-1 overflow-hidden"
                                         >
                                             {belajarDropdown.map((item) => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
                                                     onClick={() => setIsOpen(false)}
-                                                    className={`px-3 py-2 rounded-lg text-sm flex items-center gap-2 ${pathname === item.href
-                                                        ? 'text-electric'
-                                                        : 'text-gray-500 hover:text-electric'
-                                                        }`}
+                                                    className="px-3 py-2 rounded-lg text-sm flex items-center gap-2 text-gray-600"
                                                 >
                                                     <item.icon className="w-4 h-4" />
                                                     {item.label}
@@ -179,21 +179,21 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className={`px-3 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors ${pathname === link.href
-                                        ? 'text-electric'
-                                        : 'text-gray-600 hover:text-electric'
-                                        }`}
+                                    className="px-3 py-3 rounded-lg text-base font-medium flex items-center gap-3 text-navy"
                                 >
+                                    <link.icon className="w-5 h-5" />
                                     {link.label}
                                 </Link>
                             ))}
+                        </div>
 
-                            {/* Discord CTA */}
+                        {/* Discord CTA - Always visible at bottom */}
+                        <div className="flex-shrink-0 p-6 bg-white border-t border-gray-100">
                             <a
                                 href="https://discord.gg/s9jwwtXc6V"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block mt-3 px-4 py-2.5 bg-electric text-white text-sm font-medium rounded-lg text-center hover:bg-electric/90 transition-colors"
+                                className="block px-4 py-3 bg-electric text-white text-sm font-medium rounded-lg text-center hover:bg-electric/90 transition-colors"
                             >
                                 Join Discord
                             </a>

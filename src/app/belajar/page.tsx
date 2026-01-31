@@ -68,7 +68,7 @@ export default function BelajarPage() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-5xl sm:text-6xl font-bold text-navy leading-tight mb-6"
+                            className="text-3xl sm:text-4xl md:text-6xl font-bold text-navy leading-tight mb-6"
                         >
                             Belajar{' '}
                             <span className="bg-gradient-to-r from-electric to-purple-500 bg-clip-text text-transparent">
@@ -81,7 +81,7 @@ export default function BelajarPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-xl text-gray-600 max-w-2xl mx-auto mb-12"
+                            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10"
                         >
                             Resources lengkap untuk menjadi AI Engineer. Dari paper breakdowns hingga
                             e-book praktis, semua dalam Bahasa Indonesia.
@@ -92,7 +92,7 @@ export default function BelajarPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="flex justify-center gap-12"
+                            className="flex justify-center gap-6 sm:gap-12"
                         >
                             {[
                                 { value: '14+', label: 'Resources' },
@@ -100,7 +100,7 @@ export default function BelajarPage() {
                                 { value: '100%', label: 'Bahasa Indonesia' },
                             ].map((stat, index) => (
                                 <div key={index} className="text-center">
-                                    <div className="text-3xl font-bold bg-gradient-to-r from-navy to-electric bg-clip-text text-transparent">
+                                    <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-navy to-electric bg-clip-text text-transparent">
                                         {stat.value}
                                     </div>
                                     <div className="text-gray-500 text-sm">{stat.label}</div>

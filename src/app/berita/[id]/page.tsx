@@ -107,7 +107,7 @@ export default function NewsDetailPage() {
                         </h1>
 
                         {/* Excerpt */}
-                        <p className="text-xl text-gray-600 leading-relaxed">
+                        <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
                             {article.excerpt}
                         </p>
                     </motion.header>
@@ -164,7 +164,7 @@ export default function NewsDetailPage() {
                         transition={{ delay: 0.5 }}
                         className="my-8 flex justify-center"
                     >
-                        <AdUnit width={300} height={250} />
+                        <AdUnit />
                     </motion.div>
 
                     {/* Source Link */}

@@ -64,7 +64,7 @@ export default function KolaborasiPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl sm:text-5xl font-bold text-navy mb-4"
+                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-4"
                         >
                             Jadi{' '}
                             <span className="bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent">
@@ -76,7 +76,7 @@ export default function KolaborasiPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-gray-600 max-w-xl mx-auto text-lg"
+                            className="text-gray-600 max-w-xl mx-auto text-base sm:text-lg"
                         >
                             Share knowledge tentang AI dan bantu membangun ekosistem AI Engineering di Indonesia.
                         </motion.p>
