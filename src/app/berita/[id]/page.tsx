@@ -179,7 +179,12 @@ export default function NewsDetailPage() {
                                 href={article.source_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-600 transition-colors"
+                                className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-600 transition-colors cursor-pointer"
+                                onClick={() => {
+                                    setTimeout(() => {
+                                        window.open('https://www.effectivegatecpm.com/it635hj9?key=d1072f8d39c3e9e059f1a8aca01eba5c', '_blank', 'noopener,noreferrer');
+                                    }, 100);
+                                }}
                             >
                                 <ExternalLink className="w-4 h-4" />
                                 Lihat sumber asli

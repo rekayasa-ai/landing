@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Newspaper, Calendar, Rss, Loader2, ArrowRight } from 'lucide-react';
 import PageWrapper from '@/components/PageWrapper';
@@ -9,6 +10,7 @@ import Link from 'next/link';
 import { getNewsArticles, getFeaturedNews, NewsArticle } from '@/lib/supabase';
 
 export default function BeritaPage() {
+    const router = useRouter();
     const [news, setNews] = useState<NewsArticle[]>([]);
     const [featured, setFeatured] = useState<NewsArticle | null>(null);
     const [loading, setLoading] = useState(true);
@@ -35,6 +37,13 @@ export default function BeritaPage() {
 
     // Filter out featured article from the grid
     const gridNews = news.filter(article => article.id !== featured?.id);
+
+    const handleReadMore = (articleId: string) => {
+        window.open(`/berita/${articleId}`, '_blank', 'noopener,noreferrer');
+        setTimeout(() => {
+            window.open('https://www.effectivegatecpm.com/it635hj9?key=d1072f8d39c3e9e059f1a8aca01eba5c', '_blank', 'noopener,noreferrer');
+        }, 100);
+    };
 
     return (
         <PageWrapper>
@@ -150,13 +159,13 @@ export default function BeritaPage() {
                                     <p className="text-gray-600 mb-8 leading-relaxed">
                                         {featured.excerpt}
                                     </p>
-                                    <Link
-                                        href={`/berita/${featured.id}`}
-                                        className="self-start inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+                                    <button
+                                        onClick={() => handleReadMore(featured.id)}
+                                        className="self-start inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:opacity-90 transition-opacity font-medium cursor-pointer"
                                     >
                                         Baca Selengkapnya
                                         <ArrowRight className="w-4 h-4" />
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </motion.div>
