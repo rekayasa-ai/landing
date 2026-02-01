@@ -19,6 +19,10 @@ import {
   Rocket,
   Target,
   Zap,
+  FileText,
+  Lightbulb,
+  BookOpen,
+  GraduationCap,
 } from 'lucide-react';
 import PageWrapper from '@/components/PageWrapper';
 
@@ -97,6 +101,40 @@ const collaborationTypes = [
   },
 ];
 
+const belajarSections = [
+  {
+    href: '/belajar/paper',
+    icon: FileText,
+    title: 'Paper Breakdowns',
+    description: 'Breakdown detail paper-paper AI paling influential. Transformer, LoRA, RAG, dan lainnya dijelaskan secara mendalam.',
+    color: 'from-purple-500 to-pink-500',
+    stats: '4 Papers',
+  },
+  {
+    href: '/belajar/konsep',
+    icon: Lightbulb,
+    title: 'Microlearning',
+    description: 'Konsep-konsep AI fundamental dijelaskan dengan istilah sederhana dan analogi yang mudah dipahami.',
+    color: 'from-electric to-cyan-500',
+    stats: '6 Konsep',
+  },
+  {
+    href: '/belajar/ebook',
+    icon: BookOpen,
+    title: 'E-book Premium',
+    description: 'Panduan lengkap AI Engineering dalam Bahasa Indonesia. Ditulis praktisi, untuk praktisi.',
+    color: 'from-orange-500 to-red-500',
+    stats: '4 E-books',
+    isPremium: true,
+  },
+];
+
+const belajarFeatures = [
+  { icon: Sparkles, title: 'Bahasa Sederhana', description: 'Analogi-based learning yang bikin konsep kompleks jadi gampang.' },
+  { icon: Rocket, title: 'Selalu Update', description: 'Konten baru ditambahkan setiap minggu mengikuti perkembangan AI.' },
+  { icon: Users2, title: 'Komunitas', description: 'Diskusi langsung dengan AI Engineers Indonesia di Discord.' },
+];
+
 export default function HomePage() {
   return (
     <PageWrapper>
@@ -127,21 +165,12 @@ export default function HomePage() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-center">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-full text-sm font-medium mb-8"
-            >
-              #1 Platform AI Engineering Indonesia
-            </motion.div>
-
             {/* Main Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-5xl md:text-7xl font-bold text-navy leading-tight mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-navy leading-tight mb-6"
             >
               Bangun Karir di
               <br />
@@ -155,11 +184,10 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
+              className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
             >
-              <span className="font-semibold text-navy">rekayasa.ai</span> adalah platform edukasi AI
-              berbahasa Indonesia. Kami membantu Anda menguasai AI Engineering dari fundamental
-              hingga production-ready applications.
+              <span className="font-semibold text-navy">Rekayasa AI</span> adalah platform edukasi AI berbahasa Indonesia. Kami
+              membantu Anda menguasai AI Engineering dari fundamental hingga production-ready applications.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -169,13 +197,13 @@ export default function HomePage() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             >
-              <Link
-                href="/belajar"
+              <a
+                href="#belajar"
                 className="btn-primary px-8 py-4 rounded-xl text-base font-semibold flex items-center justify-center gap-2 shadow-lg shadow-electric/25"
               >
-                Mulai Belajar Gratis
+                Mulai Belajar Sekarang
                 <ArrowRight className="w-5 h-5" />
-              </Link>
+              </a>
               <a
                 href="#roadmap"
                 className="btn-secondary px-8 py-4 rounded-xl text-base font-semibold flex items-center justify-center gap-2"
@@ -185,7 +213,7 @@ export default function HomePage() {
               </a>
             </motion.div>
 
-            {/* Stats */}
+            {/* Stats - Commented out for now
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -205,6 +233,7 @@ export default function HomePage() {
                 </div>
               ))}
             </motion.div>
+            */}
           </div>
         </div>
 
@@ -221,38 +250,147 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* AI Engineer Roadmap Section */}
-      <section id="roadmap" className="py-24 bg-gray-50">
+      {/* Belajar Section - Learning Resources */}
+      <section id="belajar" className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-electric/10 text-electric rounded-full text-sm font-medium mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 text-orange-600 rounded-full text-sm font-semibold mb-4"
             >
-              <Zap className="w-4 h-4" />
-              Learning Path
+              <Rocket className="w-4 h-4" />
+              Saatnya Upgrade Skill
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold text-navy mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-4"
             >
-              AI Engineer <span className="text-electric">Roadmap</span>
+              Kuasai <span className="text-electric">AI Engineering</span> Sekarang
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-gray-600 max-w-2xl mx-auto text-lg"
+              className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed"
             >
-              Perjalanan dari zero ke AI Engineer dalam 12-18 bulan. Setiap phase dirancang
-              untuk membangun skill secara sistematis.
+              AI adoption meningkat pesat. Perusahaan berlomba mengintegrasikan AI ke bisnis mereka.
+              <span className="font-semibold text-navy"> Skill AI Engineering bukan pilihan namun kebutuhan.</span>
+            </motion.p>
+          </div>
+
+          {/* Resource Cards */}
+          <div className="grid lg:grid-cols-3 gap-6">
+            {belajarSections.map((section, index) => (
+              <motion.div
+                key={section.href}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link
+                  href={section.href}
+                  className="block h-full bg-gray-50 rounded-2xl border border-gray-100 p-8 card-scale group hover:shadow-lg transition-all"
+                >
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${section.color} flex items-center justify-center shadow-lg`}>
+                      <section.icon className="w-8 h-8 text-white" />
+                    </div>
+                    {section.isPremium && (
+                      <span className="px-3 py-1 bg-gradient-to-r from-electric to-purple-500 text-white text-xs font-bold rounded-full">
+                        PREMIUM
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-navy mb-3 group-hover:text-electric transition-colors">
+                    {section.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-6">
+                    {section.description}
+                  </p>
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <span className="text-sm text-gray-500 font-medium">{section.stats}</span>
+                    <span className="flex items-center gap-1 text-electric font-semibold text-sm">
+                      Explore
+                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Why Learn Here */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-20 mb-10"
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-navy">
+              Kenapa Belajar di Rekayasa AI?
+            </h3>
+            <p className="text-gray-500 mt-2 max-w-xl mx-auto">
+              Platform edukasi AI yang dirancang untuk Indonesia
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {belajarFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center p-6 bg-gray-50 rounded-2xl"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-electric/10 to-purple-500/10 flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-7 h-7 text-electric" />
+                </div>
+                <h4 className="font-bold text-navy text-lg mb-2">{feature.title}</h4>
+                <p className="text-gray-500 text-sm">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI Engineer Roadmap Section */}
+      <section id="roadmap" className="py-24 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-4"
+            >
+              AI Engineering <span className="text-electric">Roadmap</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed"
+            >
+              Roadmap yang <span className="font-semibold text-navy">diselaraskan dengan kebutuhan industri global</span>.
+              Perjalanan 12-18 bulan untuk menjadi AI Engineer yang siap bersaing di pasar internasional.
             </motion.p>
           </div>
 
@@ -325,7 +463,7 @@ export default function HomePage() {
               href="/belajar"
               className="btn-primary px-8 py-4 rounded-xl text-base font-semibold inline-flex items-center gap-2 shadow-lg shadow-electric/25"
             >
-              Mulai dari Foundation
+              Start your journey
               <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
@@ -350,10 +488,10 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-electric rounded-full text-sm font-medium mb-6"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-electric/20 text-electric rounded-full text-sm font-semibold mb-6"
               >
-                <MessageCircle className="w-4 h-4" />
-                Collaboration
+                <Users2 className="w-4 h-4" />
+                Bangun Bersama
               </motion.div>
 
               <motion.h2
@@ -361,11 +499,9 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl sm:text-5xl font-bold text-white mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6"
               >
-                Mari
-                <br />
-                <span className="text-electric">Berkolaborasi!</span>
+                Mari <span className="text-electric">Berkolaborasi!</span>
               </motion.h2>
 
               <motion.p
@@ -373,10 +509,10 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-gray-400 text-lg mb-8"
+                className="text-gray-400 text-lg leading-relaxed mb-8"
               >
-                Kami selalu terbuka untuk kolaborasi dengan siapa saja yang ingin
-                berkontribusi dalam pengembangan ekosistem AI di Indonesia.
+                Ekosistem AI Indonesia butuh lebih banyak kontributor.
+                <span className="text-white font-medium"> Jadilah bagian dari movement ini.</span> Bangun konten, komunitas, atau partnership bersama kami.
               </motion.p>
 
               {/* Collaboration Types */}

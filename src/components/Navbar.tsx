@@ -12,8 +12,15 @@ const belajarDropdown = [
     { href: '/belajar/ebook', label: 'E-book', icon: BookOpen, description: 'Panduan lengkap' },
 ];
 
-const navLinks = [
-    { href: '/berita', label: 'Berita', icon: Newspaper },
+interface NavLink {
+    href: string;
+    label: string;
+    icon: typeof Newspaper;
+    external?: boolean;
+}
+
+const navLinks: NavLink[] = [
+    { href: 'https://blog.rekayasaai.space', label: 'Blog', icon: Newspaper, external: true },
     { href: '/komunitas', label: 'Komunitas', icon: Users },
     { href: '/kolaborasi', label: 'Kolaborasi', icon: Handshake },
 ];
@@ -90,16 +97,28 @@ export default function Navbar() {
 
                         {/* Other Nav Links */}
                         {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={`text-sm font-medium transition-colors ${pathname === link.href
-                                    ? 'text-electric'
-                                    : 'text-gray-600 hover:text-electric'
-                                    }`}
-                            >
-                                {link.label}
-                            </Link>
+                            link.external ? (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm font-medium transition-colors text-gray-600 hover:text-electric"
+                                >
+                                    {link.label}
+                                </a>
+                            ) : (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={`text-sm font-medium transition-colors ${pathname === link.href
+                                        ? 'text-electric'
+                                        : 'text-gray-600 hover:text-electric'
+                                        }`}
+                                >
+                                    {link.label}
+                                </Link>
+                            )
                         ))}
 
                         {/* CTA Button */}
@@ -175,28 +194,42 @@ export default function Navbar() {
 
                             {/* Other Nav Links */}
                             {navLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="px-3 py-3 rounded-lg text-base font-medium flex items-center gap-3 text-navy"
-                                >
-                                    <link.icon className="w-5 h-5" />
-                                    {link.label}
-                                </Link>
+                                link.external ? (
+                                    <a
+                                        key={link.href}
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => setIsOpen(false)}
+                                        className="px-3 py-3 rounded-lg text-base font-medium flex items-center gap-3 text-navy"
+                                    >
+                                        <link.icon className="w-5 h-5" />
+                                        {link.label}
+                                    </a>
+                                ) : (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className="px-3 py-3 rounded-lg text-base font-medium flex items-center gap-3 text-navy"
+                                    >
+                                        <link.icon className="w-5 h-5" />
+                                        {link.label}
+                                    </Link>
+                                )
                             ))}
-                        </div>
 
-                        {/* Discord CTA - Always visible at bottom */}
-                        <div className="flex-shrink-0 p-6 bg-white border-t border-gray-100">
-                            <a
-                                href="https://discord.gg/s9jwwtXc6V"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block px-4 py-3 bg-electric text-white text-sm font-medium rounded-lg text-center hover:bg-electric/90 transition-colors"
-                            >
-                                Join Discord
-                            </a>
+                            {/* Discord CTA - Inside content with gap */}
+                            <div className="mt-8 pt-6 border-t border-gray-100">
+                                <a
+                                    href="https://discord.gg/s9jwwtXc6V"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block px-4 py-3 bg-electric text-white text-sm font-medium rounded-lg text-center hover:bg-electric/90 transition-colors"
+                                >
+                                    Join Discord
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
                 )}
