@@ -556,7 +556,7 @@ export default function HomePage() {
                 {/* Contact Options */}
                 <div className="space-y-4 mb-8">
                   <a
-                    href="mailto:hello@rekayasa.ai"
+                    href="mailto:mail.rekayasaai@gmail.com"
                     className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-electric/5 transition-colors group"
                   >
                     <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center group-hover:bg-electric/20 transition-colors">
@@ -564,7 +564,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <div className="text-sm text-gray-500">Email</div>
-                      <div className="font-semibold text-navy">hello@rekayasa.ai</div>
+                      <div className="font-semibold text-navy">mail.rekayasaai@gmail.com</div>
                     </div>
                   </a>
 

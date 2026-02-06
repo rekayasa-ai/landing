@@ -180,7 +180,7 @@ export default function KolaborasiPage() {
                             Kirim proposal topik kamu. Tim kami akan review dan menghubungi dalam 2-3 hari kerja.
                         </p>
                         <a
-                            href="mailto:contribute@rekayasa.ai"
+                            href="mailto:mail.rekayasaai@gmail.com"
                             className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2 transition-all shadow-lg shadow-green-500/25"
                         >
                             <Send className="w-5 h-5" />
