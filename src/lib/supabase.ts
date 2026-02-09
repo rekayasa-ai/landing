@@ -153,13 +153,50 @@ export async function getPapers(): Promise<Paper[]> {
     return [];
   }
 
-  const { data, error } = await supabase
+  const { data, error, status, statusText } = await supabase
     .from('papers')
     .select('*')
     .order('year', { ascending: false });
 
   if (error) {
     console.error('Error fetching papers:', error);
+    console.error('Status:', status, statusText);
+    return [];
+  }
+
+  console.log('Papers fetched:', data?.length || 0, 'records');
+  return data || [];
+}
+
+// Lightweight type for listing (avoids heavy breakdown_sections JSON)
+export type PaperSummary = {
+  id: string;
+  title: string;
+  summary: string;
+  impact_badge: string;
+  authors: string[];
+  year: number;
+  created_at: string;
+};
+
+/**
+ * Fetch published papers with only summary fields (optimized for listing)
+ * @returns Array of lightweight paper summaries
+ */
+export async function getPublishedPapers(): Promise<PaperSummary[]> {
+  if (!supabase) {
+    console.log('Supabase not connected');
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from('papers')
+    .select('id, title, summary, impact_badge, authors, year, created_at')
+    .eq('status', 'published')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching published papers:', error);
     return [];
   }
 
@@ -220,16 +257,56 @@ export async function getKonsep(): Promise<Konsep[]> {
   return data || [];
 }
 
-// Paper Breakdowns
+// Paper Breakdowns - Types for JSONB columns
+export type BreakdownSection = {
+  title: string;
+  original_text: string;
+  simplified_explanation: string;
+  analogy: string;
+};
+
+export type GlossaryTerm = {
+  term: string;
+  definition: string;
+};
+
 export interface Paper {
   id: string;
   title: string;
-  authors: string;
-  year: string;
-  category: 'LLM' | 'Vision' | 'NLP' | 'Agents' | 'Multimodal';
-  summary: string;
-  keyInsights: string[];
+  authors: string[];
+  year: number;
   resource_url: string;
+  summary: string;
+  impact_badge: string;
+  key_insights: string[];
+  breakdown_sections: BreakdownSection[];
+  glossary: GlossaryTerm[];
+  created_at: string;
+  category?: 'LLM' | 'Vision' | 'NLP' | 'Agents' | 'Multimodal';
+  status?: 'draft' | 'published';
+}
+
+/**
+ * Fetch a single paper by ID from Supabase
+ */
+export async function getPaperById(id: string): Promise<Paper | null> {
+  if (!supabase) {
+    console.log('Supabase not connected');
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from('papers')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching paper:', error);
+    return null;
+  }
+
+  return data;
 }
 
 // Konsep Inti (Micro-content)

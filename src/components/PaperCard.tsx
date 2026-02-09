@@ -32,8 +32,8 @@ export default function PaperCard({ paper, index }: PaperCardProps) {
                 <div className="w-12 h-12 rounded-xl bg-navy/5 flex items-center justify-center">
                     <FileText className="w-6 h-6 text-navy" />
                 </div>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${categoryColors[paper.category] || 'bg-gray-100 text-gray-600'}`}>
-                    {paper.category}
+                <span className={`px-3 py-1 rounded-full text-xs font-medium ${paper.category ? (categoryColors[paper.category] || 'bg-gray-100 text-gray-600') : 'bg-gray-100 text-gray-600'}`}>
+                    {paper.category || 'General'}
                 </span>
             </div>
 
@@ -59,7 +59,7 @@ export default function PaperCard({ paper, index }: PaperCardProps) {
 
             {/* Key Insights */}
             <div className="flex flex-wrap gap-2 mb-5">
-                {paper.keyInsights.slice(0, 3).map((insight, i) => (
+                {paper.key_insights?.slice(0, 3).map((insight, i) => (
                     <span key={i} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">
                         {insight}
                     </span>

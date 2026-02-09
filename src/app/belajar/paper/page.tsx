@@ -1,13 +1,19 @@
 import PageWrapper from '@/components/PageWrapper';
-import PaperList from '@/components/PaperList';
-import { getPapers } from '@/lib/supabase';
+import PaperFeed from '@/components/PaperFeed';
+import { getPublishedPapers } from '@/lib/supabase';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Perpustakaan Paper | RekayasaAI',
+    description: 'Kumpulan paper AI yang udah diterjemahin ke Bahasa Manusia. Belajar riset AI terbaru dengan penjelasan sederhana.',
+};
 
 export default async function PaperPage() {
-    const papers = await getPapers();
+    const papers = await getPublishedPapers();
 
     return (
         <PageWrapper>
-            <PaperList papers={papers} />
+            <PaperFeed papers={papers} />
         </PageWrapper>
     );
 }
