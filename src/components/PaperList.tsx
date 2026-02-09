@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, Search, Calendar, Users, ChevronDown, SlidersHorizontal } from 'lucide-react';
-import BridgeButton from '@/components/BridgeButton';
+import { FileText, Search, Calendar, Users, ChevronDown, SlidersHorizontal, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import type { Paper } from '@/lib/supabase';
 
 const categories = ['Semua', 'LLM', 'Vision', 'NLP', 'Agents', 'Multimodal'];
@@ -131,49 +131,51 @@ export default function PaperList({ papers }: PaperListProps) {
                     {filteredPapers.length > 0 ? (
                         <div className="space-y-4">
                             {filteredPapers.map((paper, index) => (
-                                <motion.article
-                                    key={paper.id}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.03 }}
-                                    className="bg-white rounded-xl p-5 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow"
-                                >
-                                    {/* Top Row: Category & Year */}
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <span className="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg">
-                                            {paper.category}
-                                        </span>
-                                        <span className="text-gray-400 text-xs flex items-center gap-1">
-                                            <Calendar className="w-3 h-3" />
-                                            {paper.year}
-                                        </span>
-                                    </div>
+                                <Link key={paper.id} href={`/belajar/paper/${paper.id}`}>
+                                    <motion.article
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: index * 0.03 }}
+                                        className="bg-white rounded-xl p-5 sm:p-6 border border-gray-100 hover:shadow-md hover:border-indigo-200 transition-all cursor-pointer group"
+                                    >
+                                        {/* Top Row: Category & Year */}
+                                        <div className="flex items-center gap-2 mb-3">
+                                            {paper.category && (
+                                                <span className="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg">
+                                                    {paper.category}
+                                                </span>
+                                            )}
+                                            <span className="text-gray-400 text-xs flex items-center gap-1">
+                                                <Calendar className="w-3 h-3" />
+                                                {paper.year}
+                                            </span>
+                                        </div>
 
-                                    {/* Title */}
-                                    <h3 className="text-lg sm:text-xl font-bold text-navy mb-2 leading-snug">
-                                        {paper.title}
-                                    </h3>
+                                        {/* Title */}
+                                        <h3 className="text-lg sm:text-xl font-bold text-navy mb-2 leading-snug group-hover:text-indigo-600 transition-colors">
+                                            {paper.title}
+                                        </h3>
 
-                                    {/* Authors */}
-                                    <p className="text-gray-400 text-sm mb-3 flex items-center gap-1.5">
-                                        <Users className="w-3.5 h-3.5" />
-                                        {paper.authors}
-                                    </p>
+                                        {/* Authors */}
+                                        <p className="text-gray-400 text-sm mb-3 flex items-center gap-1.5">
+                                            <Users className="w-3.5 h-3.5" />
+                                            {Array.isArray(paper.authors) ? paper.authors.join(', ') : paper.authors}
+                                        </p>
 
-                                    {/* Summary */}
-                                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
-                                        {paper.summary}
-                                    </p>
+                                        {/* Summary */}
+                                        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                                            {paper.summary}
+                                        </p>
 
-                                    {/* Action */}
-                                    <div className="flex justify-end">
-                                        <BridgeButton
-                                            resourceUrl={paper.resource_url}
-                                            label="Baca Breakdown"
-                                            className="text-sm"
-                                        />
-                                    </div>
-                                </motion.article>
+                                        {/* Action */}
+                                        <div className="flex justify-end">
+                                            <span className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 group-hover:text-indigo-700">
+                                                Baca Breakdown
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </span>
+                                        </div>
+                                    </motion.article>
+                                </Link>
                             ))}
                         </div>
                     ) : (
