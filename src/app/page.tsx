@@ -617,3 +617,5 @@ export default function HomePage() {
     </PageWrapper>
   );
 }
+
+export const revalidate = 10;

@@ -11,3 +11,4 @@ export default async function KonsepPage() {
         </PageWrapper>
     );
 }
+export const revalidate = 10;
