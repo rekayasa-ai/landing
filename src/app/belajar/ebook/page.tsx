@@ -11,3 +11,4 @@ export default async function EbookPage() {
         </PageWrapper>
     );
 }
+export const revalidate = 60;
