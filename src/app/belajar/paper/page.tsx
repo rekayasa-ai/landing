@@ -17,4 +17,4 @@ export default async function PaperPage() {
         </PageWrapper>
     );
 }
-export const revalidate = 10;
+export const revalidate = 60;
