@@ -32,7 +32,7 @@ export default function PaperHero({ paper }: PaperHeroProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-2xl sm:text-3xl lg:text-4xl font-bold text-navy text-center leading-tight mb-4"
+                    className="text-2xl sm:text-3xl lg:text-4xl font-bold text-navy text-center leading-tight mb-8"
                 >
                     {paper.title}
                 </motion.h1>
@@ -42,27 +42,36 @@ export default function PaperHero({ paper }: PaperHeroProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500 mb-8"
+                    className="mb-8"
                 >
-                    <span className="flex items-center gap-1.5">
-                        <Users className="w-4 h-4" />
-                        {Array.isArray(paper.authors) ? paper.authors.join(', ') : paper.authors}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" />
-                        {paper.year}
-                    </span>
-                    {paper.resource_url && (
-                        <a
-                            href={paper.resource_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-electric hover:underline"
-                        >
-                            <ExternalLink className="w-4 h-4" />
-                            Baca Paper Asli
-                        </a>
-                    )}
+                    <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
+                        {(Array.isArray(paper.authors) ? paper.authors : [paper.authors]).map((author, i) => (
+                            <span
+                                key={i}
+                                className="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-600 
+                                         text-sm font-medium rounded-lg border border-gray-200"
+                            >
+                                {author}
+                            </span>
+                        ))}
+                    </div>
+                    <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+                        <span className="flex items-center gap-1.5">
+                            <Calendar className="w-4 h-4" />
+                            {paper.year}
+                        </span>
+                        {paper.resource_url && (
+                            <a
+                                href={paper.resource_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 text-electric hover:underline"
+                            >
+                                <ExternalLink className="w-4 h-4" />
+                                Baca Paper Asli
+                            </a>
+                        )}
+                    </div>
                 </motion.div>
 
                 {/* 5-Year-Old Summary - The Hook */}
