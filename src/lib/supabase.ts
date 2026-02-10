@@ -177,11 +177,13 @@ export type PaperSummary = {
   authors: string[];
   year: number;
   created_at: string;
+  status?: 'draft' | 'published';
 };
 
 /**
- * Fetch published papers with only summary fields (optimized for listing)
- * @returns Array of lightweight paper summaries
+ * Fetch papers with only summary fields (optimized for listing).
+ * - Production (main branch): returns only published papers
+ * - Preview (dev branch): returns both draft and published papers
  */
 export async function getPublishedPapers(): Promise<PaperSummary[]> {
   if (!supabase) {
@@ -189,14 +191,24 @@ export async function getPublishedPapers(): Promise<PaperSummary[]> {
     return [];
   }
 
-  const { data, error } = await supabase
+  // Show drafts everywhere EXCEPT production (main branch on Vercel)
+  const isProduction = process.env.VERCEL_ENV === 'production';
+  const showDrafts = !isProduction;
+
+  console.log('[Papers] VERCEL_ENV:', process.env.VERCEL_ENV, '| showDrafts:', showDrafts);
+
+  let query = supabase
     .from('papers')
-    .select('id, title, summary, impact_badge, authors, year, created_at')
-    .eq('status', 'published')
-    .order('created_at', { ascending: false });
+    .select('id, title, summary, impact_badge, authors, year, created_at, status');
+
+  if (!showDrafts) {
+    query = query.eq('status', 'published');
+  }
+
+  const { data, error } = await query.order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching published papers:', error);
+    console.error('Error fetching papers:', error);
     return [];
   }
 
