@@ -191,16 +191,18 @@ export async function getPublishedPapers(): Promise<PaperSummary[]> {
     return [];
   }
 
-  const isPreview = process.env.VERCEL_ENV === 'preview' || process.env.NODE_ENV === 'development';
+  // Show drafts everywhere EXCEPT production (main branch on Vercel)
+  const isProduction = process.env.VERCEL_ENV === 'production';
+  const showDrafts = !isProduction;
+
+  console.log('[Papers] VERCEL_ENV:', process.env.VERCEL_ENV, '| showDrafts:', showDrafts);
 
   let query = supabase
     .from('papers')
     .select('id, title, summary, impact_badge, authors, year, created_at, status');
 
-  if (!isPreview) {
+  if (!showDrafts) {
     query = query.eq('status', 'published');
-  } else {
-    query = query.in('status', ['draft', 'published']);
   }
 
   const { data, error } = await query.order('created_at', { ascending: false });
