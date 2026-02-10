@@ -172,6 +172,7 @@ export async function getPapers(): Promise<Paper[]> {
 export type PaperSummary = {
   id: string;
   title: string;
+  alt_title?: string | null;
   summary: string;
   impact_badge: string;
   authors: string[];
@@ -199,7 +200,7 @@ export async function getPublishedPapers(): Promise<PaperSummary[]> {
 
   let query = supabase
     .from('papers')
-    .select('id, title, summary, impact_badge, authors, year, created_at, status');
+    .select('id, title, alt_title, summary, impact_badge, authors, year, created_at, status');
 
   if (!showDrafts) {
     query = query.eq('status', 'published');
@@ -285,6 +286,7 @@ export type GlossaryTerm = {
 export interface Paper {
   id: string;
   title: string;
+  alt_title?: string | null;
   authors: string[];
   year: number;
   resource_url: string;

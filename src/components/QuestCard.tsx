@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, BookMarked } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import type { PaperSummary } from '@/lib/supabase';
 
@@ -10,31 +10,7 @@ interface QuestCardProps {
     index: number;
 }
 
-// Rotate through warm spine colors for variety
-const SPINE_COLORS = [
-    'from-amber-500 to-orange-500',
-    'from-rose-500 to-pink-500',
-    'from-indigo-500 to-violet-500',
-    'from-emerald-500 to-teal-500',
-    'from-violet-500 to-purple-500',
-    'from-sky-500 to-blue-500',
-    'from-fuchsia-500 to-pink-500',
-];
-
-const SPINE_GLOW_COLORS = [
-    'rgba(245, 158, 11, 0.15)',
-    'rgba(244, 63, 94, 0.15)',
-    'rgba(99, 102, 241, 0.15)',
-    'rgba(16, 185, 129, 0.15)',
-    'rgba(139, 92, 246, 0.15)',
-    'rgba(14, 165, 233, 0.15)',
-    'rgba(217, 70, 239, 0.15)',
-];
-
 export default function QuestCard({ paper, index }: QuestCardProps) {
-    const spineColor = SPINE_COLORS[index % SPINE_COLORS.length];
-    const glowColor = SPINE_GLOW_COLORS[index % SPINE_GLOW_COLORS.length];
-
     // Format authors
     const authorsDisplay = Array.isArray(paper.authors)
         ? paper.authors.length > 2
@@ -45,105 +21,50 @@ export default function QuestCard({ paper, index }: QuestCardProps) {
     return (
         <Link href={`/belajar/paper/${paper.id}`}>
             <motion.article
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.06, duration: 0.4 }}
-                whileHover={{
-                    y: -6,
-                    rotateY: 2,
-                    transition: { duration: 0.25 },
-                }}
-                className="group relative h-full flex cursor-pointer"
-                style={{ perspective: '800px' }}
+                transition={{ delay: index * 0.04, duration: 0.3 }}
+                className="group relative bg-white rounded-lg border border-gray-200
+                           h-full flex flex-col overflow-hidden
+                           hover:border-gray-300 hover:shadow-md
+                           transition-all duration-200 cursor-pointer"
             >
-                {/* Book Spine */}
-                <div
-                    className={`w-2 sm:w-2.5 rounded-l-lg bg-gradient-to-b ${spineColor} 
-                               flex-shrink-0 transition-all duration-300
-                               group-hover:w-3`}
-                />
+                {/* Card Body */}
+                <div className="p-4 sm:p-5 flex flex-col flex-grow">
 
-                {/* Book Cover / Card Body */}
-                <div
-                    className="flex-1 bg-[#FFFBF5] rounded-r-xl border border-amber-100/80 
-                               border-l-0 overflow-hidden flex flex-col
-                               shadow-sm transition-all duration-300
-                               group-hover:shadow-xl"
-                    style={{
-                        boxShadow: `0 2px 8px rgba(0,0,0,0.04)`,
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.boxShadow = `0 12px 40px ${glowColor}, 0 4px 12px rgba(0,0,0,0.06)`;
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.boxShadow = `0 2px 8px rgba(0,0,0,0.04)`;
-                    }}
-                >
-                    {/* Top Bar — Year + Badges */}
-                    <div className="px-4 sm:px-5 pt-4 sm:pt-5 flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                            {/* Year shelf tag */}
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 
-                                           bg-stone-100 text-stone-500 text-xs font-medium rounded-md
-                                           border border-stone-200/60">
-                                <BookMarked className="w-3 h-3" />
-                                {paper.year}
-                            </span>
-                            {/* Draft badge */}
-                            {paper.status === 'draft' && (
-                                <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs 
-                                               font-semibold rounded-md border border-amber-200">
-                                    Draft
-                                </span>
-                            )}
-                        </div>
-                        {/* Impact badge */}
-                        {paper.impact_badge && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 
-                                           bg-gradient-to-r from-amber-500 to-orange-500 
-                                           text-white text-xs font-semibold rounded-md 
-                                           shadow-sm">
-                                <Sparkles className="w-3 h-3" />
-                                <span className="truncate max-w-[100px]">{paper.impact_badge}</span>
-                            </span>
-                        )}
-                    </div>
-
-                    {/* Title */}
-                    <div className="px-4 sm:px-5 pt-3 pb-1">
-                        <h3 className="text-base sm:text-lg font-bold text-stone-800 leading-snug 
-                                      line-clamp-2 group-hover:text-amber-800 transition-colors duration-200">
-                            {paper.title}
+                    {/* Year + Title */}
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                        <h3 className="text-base font-semibold text-gray-900 leading-snug 
+                                      line-clamp-2 group-hover:text-gray-700 transition-colors">
+                            {paper.alt_title || paper.title}
                         </h3>
+                        <span className="text-xs text-gray-400 font-semibold shrink-0 mt-0.5">
+                            {paper.year}
+                        </span>
                     </div>
-
-                    {/* Authors */}
-                    <div className="px-4 sm:px-5 pb-2">
-                        <p className="text-stone-400 text-xs italic">
-                            {authorsDisplay}
+                    {paper.alt_title && (
+                        <p className="text-gray-400 text-[11px] mb-2 line-clamp-1">
+                            {paper.title}
                         </p>
-                    </div>
+                    )}
 
                     {/* Summary */}
-                    <div className="px-4 sm:px-5 pb-4 flex-grow">
-                        <p className="text-stone-500 text-sm leading-relaxed line-clamp-3">
-                            {paper.summary}
-                        </p>
-                    </div>
+                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-3 flex-grow mt-1">
+                        {paper.summary}
+                    </p>
+                </div>
 
-                    {/* Footer CTA */}
-                    <div className="px-4 sm:px-5 py-3 border-t border-amber-100/60 
-                                  bg-gradient-to-r from-amber-50/40 to-transparent
-                                  flex items-center justify-between">
-                        <span className="text-xs text-stone-400">
-                            Bedah lengkap tersedia
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-sm font-semibold 
-                                        text-amber-700 group-hover:text-amber-800 transition-colors">
-                            Baca
-                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                    </div>
+                {/* Footer */}
+                <div className="px-4 sm:px-5 py-2.5 border-t border-gray-100 
+                              flex items-center justify-between">
+                    <span className="text-[11px] text-gray-500 font-semibold truncate max-w-[65%]">
+                        {authorsDisplay}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-xs font-medium 
+                                    text-gray-500 group-hover:text-gray-900 transition-colors">
+                        Baca
+                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
                 </div>
             </motion.article>
         </Link>
