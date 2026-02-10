@@ -42,7 +42,7 @@ export default function PaperFeed({ papers }: PaperFeedProps) {
                         transition={{ delay: 0.1 }}
                         className="text-3xl sm:text-4xl font-bold text-navy mb-3"
                     >
-                        Perpustakaan Paper
+                        Paper Feed
                     </motion.h1>
 
                     {/* Subtitle */}
@@ -96,19 +96,19 @@ export default function PaperFeed({ papers }: PaperFeedProps) {
                 </div>
             </section>
 
-            {/* Paper Grid */}
+            {/* Timeline Feed */}
             <section className="bg-gray-50/50 min-h-[60vh]">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
                     <AnimatePresence mode="wait">
                         {filteredPapers.length > 0 ? (
                             <motion.div
-                                key="grid"
+                                key="feed"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                                className="flex flex-col gap-4"
                             >
-                                {filteredPapers.map((paper, index) => (
+                                {filteredPapers.slice(0, 10).map((paper, index) => (
                                     <QuestCard key={paper.id} paper={paper} index={index} />
                                 ))}
                             </motion.div>
